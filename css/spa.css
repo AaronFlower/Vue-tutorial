@@ -1,6 +1,13 @@
 body {
 	background-color: #f7f8f9;
 }
+
+.router-component-panel {
+	background-color: #fff;
+    border-radius: 5px;
+    padding: 10px 0 20px 20px;
+}
+
 .vue-tutorial-02 .router-component-container {
 	background-color: #fff;
     border-radius: 5px;
