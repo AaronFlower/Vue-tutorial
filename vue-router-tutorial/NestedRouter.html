@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Nested Vue-Router</title>
+	
+	<link rel="stylesheet" href="../css/lib/bootstrap.css">
+	<link rel="stylesheet" href="../css/spa.css">
+
+	<script src="../js/lib/vue.js"></script>
+	<script src="../js/lib/vue-router.js"></script>
+
+</head>
+<body>
+	<div id="app" class="container">
+		<div class="row">
+			<div class="page-header col-md-8 col-md-offset-2">
+				<h1>Vue Router Tutorial <small> -- nested route</small></h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="list-group col-md-2 col-md-offset-2">
+				<a class="list-group-item" v-link="{path:'/home'}">Home</a>
+				<a class="list-group-item" v-link="{path:'/about'}">About</a>
+			</div>
+			<div class="router-component-panel col-md-6">
+				<router-view></router-view>
+			</div>
+		</div>
+	</div>
+
+	<template id="home">
+		<div>
+			<h1>Home</h1>
+			<p>{{msg}}</p>
+		</div>
+		<div>
+			<ul class="nav nav-tabs">
+				<li class="presentation"> <a v-link="{path:'/home/news'}">News</a></li>
+				<li class="presentation"> <a v-link="{path:'/home/messages'}">Messages</a></li>
+			</ul>
+			<router-view></router-view>
+		</div>
+	</template>
+
+	<template id="about">
+		<h1>About</h1>
+		<p>This is the tutoial about vue-router!</p>
+	</template>
+
+	<template id="news">
+		<ul>
+			<li>News 01</li>
+			<li>News 02</li>
+			<li>News 03</li>
+		</ul>
+	</template>
+
+	<template id="messages">
+		<ul>
+			<li>Messages 01</li>
+			<li>Messages 02</li>
+			<li>Messages 03</li>
+		</ul>
+	</template>
+
+	<script>
+		var Home = Vue.extend({
+			template: '#home',
+			data () {
+				return {
+					msg: 'Hello Nested Vue Router!'
+				}
+			}
+		})
+
+		var About = Vue.extend({
+			template: '#about'
+		})
+
+		var News = Vue.extend({
+			template: '#news'
+		})
+
+		var Messages = Vue.extend({
+			template: '#messages'
+		})
+
+		var App = Vue.extend({})
+
+		var router = new VueRouter()
+		router.map({
+			'/home': {
+				component: Home,
+				subRoutes: {
+					'/news': {
+						component: News
+					},
+					'/messages': {
+						component: Messages
+					} 
+				}
+			},
+			'/about': {
+				component: About
+			}
+		})
+
+		router.start(App, '#app')
+
+	</script>
+</body>
+</html>
