@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>First Single Webpage Application by Vue & Vue-router</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+
+	<script src="../js/vue.js"></script>
+	<script src="../js/vue-router.js"></script>
+</head>
+<body>
+	<div id="app" class="container">
+		<h2>First Single Webpage Application by Vue & Vue-router!</h2>
+		<!-- use v-link directive for navigation -->
+		<p>
+			<a v-link="{path:'/home'}">Home</a>
+			<a v-link="{path:'/about'}">About</a>
+		</p>
+		<!-- use router-view element as route outlet -->
+		<router-view></router-view>
+	</div>
+	
+	<script>
+		/* Define some components*/
+		var Home = Vue.extend({
+			template: '<p>This is your home!</p>'
+		})		
+		var About = Vue.extend({
+			template: '<p>About my home!</p>'
+		})
+		/**
+		 * The router needs a root component to render. 
+		 * For demo purposes, we will just use an empty one because we are using the HTML as the app template.
+		 */
+		var App = Vue.extend({})
+
+		// create a router instance
+		var router = new VueRouter()
+
+		// Define some routes.
+		// Each route should map to a component. 
+		router.map({
+			'/home': {
+				component: Home
+			},
+			'/about': {
+				component: About
+			}
+		})
+
+		// Start the app, the router will create an instance of App and mount to the 
+		// element matching the selector #app.
+		router.start(App, '#app')
+
+	</script>
+</body>
+</html>
