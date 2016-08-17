@@ -10,32 +10,48 @@
 	<script src="../js/lib/vue-router.js"></script>
 </head>
 <body>
-	<div id="app" class="container">
+	<div id="app" class="container vue-tutorial-02">
 		<div class="row">
 			<div class="page-header col-md-offset-2 col-md-8">
 				<h1>Vue Router Tutorial <small> With Bootstrap CSS</small></h1>
 			</div>
 		</div>
 		<div class="row">
-			<div class="list-group col-md-1 col-md-offset-2">
+			<div class="list-group col-md-2 col-md-offset-2">
 				<!-- use v-link directive for navigation -->
 				<a class="list-group-item" href="#" v-link="{path:'/home'}">Home</a>
 				<a class="list-group-item" href="#" v-link="{path:'/about'}">About</a>
 			</div>
-			<div class="col-md-6">
+			<div class="router-component-container col-md-6">
 				<!-- use router-view element as route outlet -->
 				<router-view></router-view>
 			</div>
 		</div>
+		
+		<!-- Custom component template for demo -->
+		<template id="home">
+			<h1>Home</h1>
+			<p>{{msg}}</p>
+		</template>
+		
+		<template id="about">
+			<h1>About</h1>
+			<p>This is the tutoial about vue-router!</p>
+		</template>
 	</div>
 	
 	<script>
 		/* Define some components*/
 		var Home = Vue.extend({
-			template: '<p>This is your home!</p>'
+			template: '#home',
+			data () {
+				return {
+					msg: 'Hello Vue Router'
+				}
+			}
 		})		
 		var About = Vue.extend({
-			template: '<p>About my home!</p>'
+			template: '#about'
 		})
 		/**
 		 * The router needs a root component to render. 
